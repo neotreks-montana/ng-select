@@ -1,11 +1,13 @@
 {
   "repository": "ng-select/ng-select",
+  "version": "3.2.1",
   "engines": {
     "node": ">= 6.9.0",
     "npm": ">= 3.0.0"
   },
   "scripts": {
     "build": "ng build ng-select && ng build ng-option-highlight && yarn build:themes && yarn copy-sass",
+    "postbuild": "tsc ./scripts/css-bundle.ts && ts-node ./scripts/css-bundle.js && cp ./dist/_theme.scss ./dist/ng-select/_theme.scss",
     "build:demo": "ng build demo --prod --baseHref=/ng-select && yarn copy-examples",
     "build:themes": "node-sass --output-style compressed src/ng-select/themes/ -o dist/ng-select/themes",
     "copy-sass": "mkdir -p dist/ng-select/scss && cp src/ng-select/**/*.scss dist/ng-select/scss",
@@ -72,6 +74,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^11.1.2",
     "node-sass": "^4.12.0",
+    "scss-bundle": "3.1.2",
     "semantic-release": "^17.2.3",
     "standard-version": "^8.0.1",
     "ts-node": "~8.3.0",
